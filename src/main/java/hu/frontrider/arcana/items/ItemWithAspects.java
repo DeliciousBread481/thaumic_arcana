@@ -7,33 +7,32 @@ import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.aspects.IEssentiaContainerItem;
 
 public class ItemWithAspects extends ItemBase implements IEssentiaContainerItem {
+   public ItemWithAspects(ResourceLocation resourceLocation) {
+      super(resourceLocation);
+   }
 
-    public ItemWithAspects(ResourceLocation resourceLocation) {
-        super(resourceLocation);
-    }
+   public AspectList getAspects(ItemStack itemStack) {
+      NBTTagCompound tagCompound = itemStack.func_77978_p();
+      AspectList aspectList = new AspectList();
+      if (tagCompound == null) {
+         return aspectList;
+      } else {
+         aspectList.readFromNBT(tagCompound);
+         return aspectList;
+      }
+   }
 
-    public AspectList getAspects(ItemStack itemStack) {
-        NBTTagCompound tagCompound = itemStack.getTagCompound();
-        AspectList aspectList = new AspectList();
-        if (tagCompound == null)
-            return aspectList;
+   public void setAspects(ItemStack itemStack, AspectList aspectList) {
+      NBTTagCompound tagCompound = itemStack.func_77978_p();
+      if (tagCompound == null) {
+         tagCompound = new NBTTagCompound();
+      }
 
-        aspectList.readFromNBT(tagCompound);
+      aspectList.writeToNBT(tagCompound);
+      itemStack.func_77982_d(tagCompound);
+   }
 
-        return aspectList;
-    }
-
-    @Override
-    public void setAspects(ItemStack itemStack, AspectList aspectList) {
-        NBTTagCompound tagCompound = itemStack.getTagCompound();
-        if (tagCompound == null)
-            tagCompound = new NBTTagCompound();
-        aspectList.writeToNBT(tagCompound);
-        itemStack.setTagCompound(tagCompound);
-    }
-
-    @Override
-    public boolean ignoreContainedAspects() {
-        return false;
-    }
+   public boolean ignoreContainedAspects() {
+      return false;
+   }
 }

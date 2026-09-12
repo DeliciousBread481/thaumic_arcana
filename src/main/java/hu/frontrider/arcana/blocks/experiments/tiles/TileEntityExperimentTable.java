@@ -1,52 +1,36 @@
 package hu.frontrider.arcana.blocks.experiments.tiles;
 
+import javax.annotation.Nullable;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-import javax.annotation.Nullable;
-
-import static net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
-
 public class TileEntityExperimentTable extends TileEntity {
+   private ItemStackHandler cage = new ItemStackHandler(8);
 
-    private ItemStackHandler cage = new ItemStackHandler(8);
+   public void func_145836_u() {
+      super.func_145836_u();
+   }
 
-    public TileEntityExperimentTable() {
+   public NBTTagCompound func_189515_b(NBTTagCompound compound) {
+      compound.func_74782_a("cage", this.cage.serializeNBT());
+      return super.func_189515_b(compound);
+   }
 
-    }
+   public void func_145839_a(NBTTagCompound compound) {
+      this.cage.deserializeNBT(compound.func_74775_l("cage"));
+      super.func_145839_a(compound);
+   }
 
-    @Override
-    public void updateContainingBlockInfo() {
-        super.updateContainingBlockInfo();
-    }
+   public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
+      return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(capability, facing);
+   }
 
-    @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-        compound.setTag("cage", cage.serializeNBT());
-        return super.writeToNBT(compound);
-    }
-
-    @Override
-    public void readFromNBT(NBTTagCompound compound) {
-        cage.deserializeNBT(compound.getCompoundTag("cage"));
-
-        super.readFromNBT(compound);
-    }
-
-    @Override
-    public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
-        return capability == ITEM_HANDLER_CAPABILITY ||
-                super.hasCapability(capability, facing);
-    }
-
-    @Nullable
-    @Override
-    public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
-        return capability == ITEM_HANDLER_CAPABILITY ? ITEM_HANDLER_CAPABILITY.cast(cage) :
-                        super.getCapability(capability, facing);
-    }
-
+   @Nullable
+   public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
+      return (T)(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ? CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(this.cage) : super.getCapability(capability, facing));
+   }
 }

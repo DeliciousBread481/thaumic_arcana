@@ -1,37 +1,19 @@
 package hu.frontrider.arcana.research.theory;
 
 import net.minecraft.block.Block;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 import thaumcraft.api.research.theorycraft.ITheorycraftAid;
 import thaumcraft.api.research.theorycraft.TheorycraftCard;
 
-import static hu.frontrider.arcana.ThaumicArcana.MODID;
-
 public class AidTable implements ITheorycraftAid {
+   @ObjectHolder("thaumic_arcana:experiment_table")
+   private static Block experiment_table = null;
 
-    @GameRegistry.ObjectHolder(MODID +":experiment_table")
-    private static Block experiment_table = null;
+   public Object getAidObject() {
+      return experiment_table;
+   }
 
-    @Override
-    public Object getAidObject() {
-        return experiment_table;
-    }
-
-    @Override
-    public Class<TheorycraftCard>[] getCards() {
-        //noinspection unchecked
-        return new Class[]{
-                CardGrow.class,
-                CardDissect.class,
-                CardDissectDead.class,
-                CardGrow.class,
-                CardDissect.class,
-                CardGrow.class,
-                CardDissectDead.class,
-                CardGrow.class,
-                CardDissect.class,
-                CardGrow.class,
-                };
-    }
-
+   public Class<TheorycraftCard>[] getCards() {
+      return new Class[]{CardGrow.class, CardDissect.class, CardDissectDead.class, CardGrow.class, CardDissect.class, CardGrow.class, CardDissectDead.class, CardGrow.class, CardDissect.class, CardGrow.class};
+   }
 }

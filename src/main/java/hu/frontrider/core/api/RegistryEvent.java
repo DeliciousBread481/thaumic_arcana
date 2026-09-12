@@ -1,27 +1,21 @@
 package hu.frontrider.core.api;
 
-import net.minecraftforge.fml.common.eventhandler.Event;
-
 import java.util.Collections;
 import java.util.List;
+import net.minecraftforge.fml.common.eventhandler.Event;
 
-/**
- *Generic registry event.
- */
 public class RegistryEvent<T> extends Event {
+   private List<T> list;
 
-    private List<T> list;
+   public RegistryEvent(List<T> items) {
+      this.list = items;
+   }
 
-    public RegistryEvent(List<T> items) {
-        list = items;
-    }
+   public void register(T item) {
+      this.list.add(item);
+   }
 
-    public void register(T item) {
-        list.add(item);
-    }
-
-    public void register(T... item) {
-        Collections.addAll(list, item);
-    }
-
+   public void register(T... item) {
+      Collections.addAll(this.list, item);
+   }
 }

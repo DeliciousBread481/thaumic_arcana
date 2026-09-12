@@ -3,8 +3,8 @@
     "modid": "thaumic_arcana",
     "name": "Thaumic Arcana",
     "description": "A thaumcraft addon creating the arcane arts of biomancy the application of magic to living creatures.",
-    "version": "${version}",
-    "mcversion": "${mcversion}",
+    "version": "1.3.1",
+    "mcversion": "1.12.2",
     "url": "",
     "updateUrl": "",
     "authorList": [
