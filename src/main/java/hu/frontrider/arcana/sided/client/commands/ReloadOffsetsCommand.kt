@@ -35,16 +35,16 @@ class ReloadOffsetsCommand(private val enchantRenderer: EnchantRenderer) : IClie
     }
 
     @SideOnly(Side.CLIENT)
-    override fun execute(server: MinecraftServer, sender: ICommandSender, args: Array<String>) {
+    override fun execute(server: MinecraftServer?, sender: ICommandSender, args: Array<String>) {
         enchantRenderer.reload()
         sender.sendMessage(TextComponentTranslation("command.thaumic_arcana.reload.feedback"))
     }
 
-    override fun checkPermission(server: MinecraftServer, sender: ICommandSender): Boolean {
+    override fun checkPermission(server: MinecraftServer?, sender: ICommandSender): Boolean {
         return true
     }
 
-    override fun getTabCompletions(server: MinecraftServer, sender: ICommandSender, args: Array<String>, targetPos: BlockPos?): List<String>? {
+    override fun getTabCompletions(server: MinecraftServer?, sender: ICommandSender, args: Array<String>, targetPos: BlockPos?): List<String>? {
         return null
     }
 

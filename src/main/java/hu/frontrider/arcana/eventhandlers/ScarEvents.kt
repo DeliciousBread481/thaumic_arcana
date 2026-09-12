@@ -1,4 +1,4 @@
-package hu.frontrider.arcana.research.researchevents
+package hu.frontrider.arcana.eventhandlers
 
 import hu.frontrider.arcana.capabilities.scar.ScarProvider
 import net.minecraft.entity.player.EntityPlayer
@@ -8,7 +8,7 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import thaumcraft.api.capabilities.ThaumcraftCapabilities.KNOWLEDGE
 
-class TheScar {
+class ScarEvents {
 
     @SubscribeEvent
     fun damageEvent(event: LivingHurtEvent) {
